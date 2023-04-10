@@ -1,0 +1,3 @@
+string1*hello world
+string2*I like my burgers extra cheesy
+string3*Help my cat harvested my organs
