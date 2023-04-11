@@ -3,6 +3,12 @@
 # currently, only block like comments are supported
 # inline comments to be implemented
 
+# list of cmds and syntax:
+# show_sprite: x, y, tag
+# text: x, y, text
+# rect: x, width, y, height, tag, hover_text
+
+
 show_sprite: 100, 100, f0
 text: 100, 240, GIVE MY CREATION LIFE!
 
