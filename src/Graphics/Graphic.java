@@ -98,8 +98,8 @@ public class Graphic extends JFrame{
 		gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		 if(gd.isFullScreenSupported() == false)
 			errorClose("Full Screen is not supported...exiting."); //$NON-NLS-1$
-		setUndecorated(false);
-		setResizable(true);
+		setUndecorated(true); // false -> show min/close tabs
+		setResizable(false); // true -> turns off "fullscreen mode"
 		setIgnoreRepaint(true);
 		gd.setFullScreenWindow(this);
 		DisplayMode[] dms = gd.getDisplayModes();

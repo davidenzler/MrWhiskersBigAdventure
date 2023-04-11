@@ -1,0 +1,9 @@
+# comments begin with '#'
+# also, the CommandAdapter class is responsible for parsing the script files
+# currently, only block like comments are supported
+# inline comments to be implemented
+
+show_sprite: 100, 100, f0
+text: 100, 240, GIVE MY CREATION LIFE!
+
+rect: 100, 128, 100, 128, f0Hover, Persephone: Princess of Eden's Realm

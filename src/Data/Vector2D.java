@@ -1,4 +1,4 @@
-package Test;
+package Data;
 
 public class Vector2D {
     int x;

@@ -1,4 +1,6 @@
-package Test;
+package Data;
+
+import Data.Vector2D;
 
 public class Entity {
     private Vector2D position;

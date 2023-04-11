@@ -3,7 +3,7 @@ Art/animations/cat_walking_right/cat_walking_right1.png*cat_walking_right1
 Art/animations/cat_walking_right/cat_walking_right2.png*cat_walking_right2
 Art/animations/cat_walking_right/cat_walking_right3.png*cat_walking_right3
 Art/animations/cat_walking_right/cat_walking_right4.png*cat_walking_right4
-Art/f.png*f
+Art/f0.png*f0
 Art/orange_cat_sitting.png*orange_cat_sitting
 Art/tree.png*tree
 Art/test_square.png*test_square
