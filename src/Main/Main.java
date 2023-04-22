@@ -1,21 +1,29 @@
 package Main;
 
-import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Iterator;
 
+import Data.Sprite;
 import Input.Mouse;
 import Data.Vector2D;
 import Data.CommandAdapter;
+import javafx.stage.Screen;
 import logic.Control;
+import particles.ParticleSystem;
+import particles.Rain;
+import Data.Frame;
+import particles.Sparkle;
 
 public class Main{
 	// define graphic window and level bounds
-	public static final int ScreenX = 1920;
-	public static final int ScreenY = 1080;
+	public static final int ScreenX = 1280;
+	public static final int ScreenY = 720;
 	public static final int MapY = 2160;
 	public static final int MapX = ScreenX;
-	public static Point mouseCoordinates;
-	public static CommandAdapter commandAdapter;
+	public static Sparkle sparkle;
+
+
 
 	public static void main(String[] args) throws IOException {
 		/**
@@ -28,14 +36,33 @@ public class Main{
 	}
 
 	/* This is your access to things BEFORE the game loop starts */
-	public static void start(Control ctrl){
-		commandAdapter = new CommandAdapter();
+	public static void start(Control ctrl) {
+		sparkle = new Sparkle(
+				795,
+				480,
+				25,
+				25,
+				20,
+				30,
+				13,
+				2);
 	}
 
 	/* This is your access to the "game loop" (It is a "callback" method from the Control class (do NOT modify that class!))*/
 	public static void update(Control ctrl) {
-		mouseCoordinates = Mouse.getMouseCoords();
-		commandAdapter.loopCmdList(ctrl);
+		ctrl.addSpriteToFrontBuffer(0, 0, "forest_1280");
+		ctrl.addSpriteToFrontBuffer(800, 500, "catnip");
+		ParticleSystem pm2 = sparkle.getParticleSystem();
+		Iterator<Data.Frame> it2 = pm2.getParticles();
+		int count = 0;
+		while(it2.hasNext()) {
+			count++;
+			Data.Frame par2 = it2.next();
+			BufferedImage particle = ctrl.getSpriteFromBackBuffer(par2.getSpriteTag()).getSprite().getSubimage(0,0,16,16);
+			Sprite particleSprite = new Sprite(64, 64, particle, "sparkleParticle");
+			ctrl.addSpriteToFrontBuffer(par2.getX(), par2.getY(), particleSprite);
+		}
+		System.out.println("\n");
 	}
 
 	public static Vector2D calcChangePlayerPosition(int target_x, int target_y, Vector2D position, int speed) {

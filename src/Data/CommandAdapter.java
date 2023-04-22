@@ -8,9 +8,6 @@ import logic.Control;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static Main.Main.mouseCoordinates;
-
-
 public class CommandAdapter {
     private ArrayList<Command> commandList;
     private int cursor;
@@ -92,12 +89,7 @@ public class CommandAdapter {
         String tag = cmd.getParmByIndex(4);
         String hoverText = cmd.getParmByIndex(5);
 
-        RECT rect = new RECT(x, x + width, y, y + height, tag, hoverText);
-        if(rect.isCollision((int)mouseCoordinates.getX(), (int)mouseCoordinates.getY())) {
-            text = rect.getHoverLabel();
-        } else {
-            text = "";
-        }
+        text="";
 
         ctrl.drawString(100, 100, text, Color.GREEN);
     }
