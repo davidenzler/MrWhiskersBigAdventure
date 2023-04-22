@@ -2,6 +2,7 @@ package Main;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.Iterator;
 
 import Data.Sprite;
@@ -22,6 +23,7 @@ public class Main{
 	public static final int MapY = 2160;
 	public static final int MapX = ScreenX;
 	public static Sparkle sparkle;
+	public static Rain rain;
 
 
 
@@ -42,10 +44,20 @@ public class Main{
 				480,
 				25,
 				25,
-				20,
+				10,
 				30,
-				13,
-				2);
+				5,
+				2
+		);
+		rain = new Rain(
+				-50,
+				0,
+				1200,
+				90,
+				25,
+				60,
+				150
+		);
 	}
 
 	/* This is your access to the "game loop" (It is a "callback" method from the Control class (do NOT modify that class!))*/
@@ -53,16 +65,24 @@ public class Main{
 		ctrl.addSpriteToFrontBuffer(0, 0, "forest_1280");
 		ctrl.addSpriteToFrontBuffer(800, 500, "catnip");
 		ParticleSystem pm2 = sparkle.getParticleSystem();
+		ParticleSystem itsRaining = rain.getParticleSystem();
+		Iterator<Data.Frame> rainIterator = itsRaining.getParticles();
 		Iterator<Data.Frame> it2 = pm2.getParticles();
-		int count = 0;
+
 		while(it2.hasNext()) {
-			count++;
 			Data.Frame par2 = it2.next();
 			BufferedImage particle = ctrl.getSpriteFromBackBuffer(par2.getSpriteTag()).getSprite().getSubimage(0,0,16,16);
-			Sprite particleSprite = new Sprite(64, 64, particle, "sparkleParticle");
+			Sprite particleSprite = new Sprite(16, 14, particle, "sparkleParticle");
 			ctrl.addSpriteToFrontBuffer(par2.getX(), par2.getY(), particleSprite);
 		}
-		System.out.println("\n");
+		while(rainIterator.hasNext()) {
+			Data.Frame rainFrame = rainIterator.next();
+			BufferedImage rainImg = ctrl.getSpriteFromBackBuffer(rainFrame.getSpriteTag()).getSprite();
+			BufferedImage subrainImg = rainImg.getSubimage(0,0,rainImg.getWidth(),rainImg.getHeight());
+			Sprite particleSprite = new Sprite(16, 16, rainImg, "rainParticle");
+			ctrl.addSpriteToFrontBuffer(rainFrame.getX(), rainFrame.getY(), particleSprite);
+		}
+
 	}
 
 	public static Vector2D calcChangePlayerPosition(int target_x, int target_y, Vector2D position, int speed) {
